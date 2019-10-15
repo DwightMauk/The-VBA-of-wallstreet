@@ -1,0 +1,66 @@
+Option Explicit
+Sub Stocks()
+
+Dim sheet As Worksheet
+Dim total As Double
+Dim firstRow As String
+Dim writeToRow As Integer
+Dim row As Double
+Dim LR As String
+writeToRow = 2
+Dim op As Integer
+Dim cl As Integer
+Dim yearchange As Long
+Dim i As Double
+
+
+
+
+    For Each sheet In sheets
+    sheet.Activate
+
+        For i = 2 To LR
+        If Cells(i, 3) = Cells(i + 1, 3) Then
+        Cells(i, 3).Value = op
+        
+        Else: Cells(i, 6) <> Cells(i + 1, 6)
+        Cells(i, 6).Value = cl
+        yearchange=(op-cl).value
+        Cells(writeToRow, 10).Value = yearchange
+        
+        End If
+        
+        Next
+        
+        
+        
+    firstRow = Range("A2").Value
+    total = Range("G2").Value
+    LR = Range("A" & Rows.Count).End(xlUp).row
+    
+        For row = 3 To LR
+        If Cells(row, 1).Value = firstRow Then
+        total = total + Cells(row, 7).Value
+        
+        Else
+        
+        Cells(writeToRow, 9).Value = firstRow
+        Cells(writeToRow, 12).Value = total
+        writeToRow = writeToRow + 1
+        
+    firstRow = Cells(row, 1).Value
+    total = Cells(row, 7).Value
+    
+    End If
+    
+    Next
+    
+  Next sheet
+  
+    
+    
+    
+
+End
+    
+End Sub

@@ -1,0 +1,43 @@
+Sub Stocks()
+
+Dim sheet As Worksheet
+For Each sheet In Worksheets
+sheet.Activate
+Dim total As Double
+Dim firstRow As String
+Dim writeToRow As Double
+Dim row As Double
+Dim LR As String
+writeToRow = 2
+
+
+
+    firstRow = Range("A2").Value
+    total = Range("G2").Value
+    LR = Range("A" & Rows.Count).End(xlUp).row
+    
+        For row = 3 To LR
+        If Cells(row, 1).Value = firstRow Then
+        total = total + Cells(row, 7).Value
+        
+        Else
+        
+        Cells(writeToRow, 9).Value = firstRow
+        Cells(writeToRow, 10).Value = total
+        writeToRow = writeToRow + 1
+        
+    firstRow = Cells(row, 1).Value
+    total = Cells(row, 7).Value
+    
+    End If
+    Next
+    
+    
+    
+    
+    
+Next sheet
+
+End
+    
+End Sub

@@ -1,0 +1,76 @@
+Option Explicit
+Sub Stocks()
+
+Dim sheet As Worksheet
+For Each sheet In sheets
+sheet.Activate
+Dim total As Double
+Dim firstRow As String
+Dim writeToRow As double
+Dim row As Double
+Dim LR As String
+writeToRow = 2
+Dim op As Double
+Dim cl As Double
+Dim yearchange As Double
+Dim percent As Double
+Dim j As Double
+Dim YCLR As String
+
+
+
+   
+       
+        
+        
+        
+    firstRow = Range("A2").Value
+    total = Range("G2").Value
+    LR = Range("A" & Rows.Count).End(xlUp).row
+    op = Cells(2, 3).Value
+        For row = 3 To LR
+        If Cells(row, 1).Value = firstRow Then
+        total = total + Cells(row, 7).Value
+            
+            
+        Else
+        cl = Cells(row, 6).Value
+        yearchange = cl - op
+        Cells(writeToRow, 9).Value = firstRow
+        Cells(writeToRow, 12).Value = total
+        Cells(writeToRow, 10).Value = yearchange
+        writeToRow = writeToRow + 1
+            If op = 0 Then
+                percent = 0
+            ElseIf percent = yearchange / op Then
+                Cells(row, 11).Value = percent
+                Cells(row, 11).NumberFormat = "0.00%"
+            
+            
+YCLR = Range("J" & Rows.Count).End(xlUp).row
+                For j = 2 To YCLR
+                    If Cells(j, 10).Value >= 0 Then
+                        Cells(j, 10).Interior.ColorIndex = 4
+                    ElseIf Cells(j, 10).Value < 0 Then
+                        Cells(j, 10).Interior.ColorIndex = 3
+                    End If
+                    Next j
+    
+    
+    firstRow = Cells(row, 1).Value
+    total = Cells(row, 7).Value
+            End If
+            
+        End If
+    
+   Next
+    
+  Next sheet
+  
+    
+    
+    
+
+
+    
+End Sub
